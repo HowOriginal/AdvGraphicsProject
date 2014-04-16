@@ -119,7 +119,11 @@ public:
 	gather_indirect = true;
 	  } else if (std::string(argv[i]) == std::string("-refractive")) {
 		  refractive = true;
-	  } else {
+	  } else if (std::string(argv[i]) == std::string("-fileout")) {
+		  i++; assert(i < argc);
+		  fileout = atoi(argv[i]);
+	  }
+	  else {
 	printf ("whoops error with command line argument %d: '%s'\n",i,argv[i]);
 	assert(0);
       }
@@ -202,6 +206,9 @@ public:
 
   // REFRACTIVE
   bool refractive;
+
+  // FILE
+  std::string fileout;
 
   // default initialization
   //  MTRand mtrand;

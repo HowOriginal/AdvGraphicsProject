@@ -1,3 +1,0 @@
-C:/Users/Andrew/ACGProjects/hw3/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/Andrew/ACGProjects/hw3/build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/Andrew/ACGProjects/hw3/build/CMakeFiles/render.dir

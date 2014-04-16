@@ -89,7 +89,8 @@ static PhotonMapping *photon_mapping;
   static void cleanupVBOs();
 
   static void animate();
-
+	
+  static void WriteToFile();
   static int DrawPixel();
   static glm::vec3 TraceRay(double i, double j);
   static glm::vec3 GetPos(double i, double j);

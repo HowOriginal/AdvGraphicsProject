@@ -68,16 +68,6 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 	glm::vec3 point = ray.pointAtParameter(hit.getT());
 	glm::vec3 answer;
 
-	bool from_outside;
-	float origin_check = glm::dot(ray.getDirection(), normal) / (glm::length(normal) * glm::length(ray.getDirection()));
-	if (origin_check > 0)
-	{
-		from_outside = false;
-	}
-	else
-	{
-		from_outside = true;
-	}
 	//std::cout << from_outside << "\n";
 	// ----------------------------------------------
 	//  start with the indirect light (ambient light)

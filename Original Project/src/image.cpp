@@ -16,7 +16,7 @@ bool Image::Save(const std::string &filename) const {
   }
 
   // misc header information
-  fprintf (file, "P6\n");
+  fprintf (file, "P3\n");
   fprintf (file, "%d %d\n", width,height);
   fprintf (file, "255\n");
 
@@ -25,10 +25,17 @@ bool Image::Save(const std::string &filename) const {
   for (int y = height-1; y >= 0; y--) {
     for (int x=0; x<width; x++) {
       Color v = GetPixel(x,y);
-      fputc ((unsigned char)(v.r),file);
-      fputc ((unsigned char)(v.g),file);
-      fputc ((unsigned char)(v.b),file);
+	  fprintf(file, "%d\t", v.r);
+	  fprintf(file, "%d\t", v.g);
+	  fprintf(file, "%d\t", v.b);
+	  //fprintf(file, v.g + " ");
+	  //fprintf(file, v.b + " ");
+
+      //fputc ((unsigned char)(v.r),file);
+      //fputc ((unsigned char)(v.g),file);
+      //fputc ((unsigned char)(v.b),file);
     }
+	fprintf(file, "\n");
   }
   fclose(file);
   return true;

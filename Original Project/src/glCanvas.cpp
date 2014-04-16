@@ -162,15 +162,24 @@ void GLCanvas::animate(){
 
   if (args->raytracing_animation) {
 	  
+	  clock_t t;
+	  int f;
+	  t = clock();
+	  printf("Rendering...\n");
+
     // draw 100 pixels and then refresh the screen and handle any user input
-	  
+	  WriteToFile();
+	  t = clock() - t;
+	  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
+	  args->raytracing_animation = false;
+	  /*
 	  for (int i = 0; i < 1000; i++) {
 		  
 		  if (!DrawPixel()) {
         args->raytracing_animation = false;
         break;
       }
-    }
+    }*/
 		  
     raytracer->setupVBOs();
   }
@@ -480,16 +489,16 @@ void GLCanvas::keyboardCB(GLFWwindow* window, int key, int scancode, int action,
 
 // trace a ray through pixel (i,j) of the image an return the color
 glm::vec3 GLCanvas::TraceRay(double i, double j) {
-
+	//std::cout << "i= " << i << "\tj= " << j << "\n";
   // compute and set the pixel color
   int max_d = std::max(args->width,args->height);
   glm::vec3 color;
-  
+  // IF THIS IS ONLY IN THE NAIVE THE TEST IS FINE
 
   // ==================================
   // ASSIGNMENT: IMPLEMENT ANTIALIASING
   // ==================================
-  
+  /*
   if (args->num_antialias_samples > 1)
   {
 	  //Stratified sampling
@@ -554,6 +563,17 @@ glm::vec3 GLCanvas::TraceRay(double i, double j) {
 	  // add that ray for visualization
 	  RayTree::AddMainSegment(r, 0, hit.getT());
   }
+  */
+
+  // Here's what we do with a single sample per pixel:
+  // construct & trace a ray through the center of the pixel
+  double x = (i - args->width / 2.0) / double(max_d) + 0.5;
+  double y = (j - args->height / 2.0) / double(max_d) + 0.5;
+  Ray r = camera->generateRay(x, y);
+  Hit hit;
+  color = raytracer->TraceRay(r, hit, args->num_bounces);
+  // add that ray for visualization
+  RayTree::AddMainSegment(r, 0, hit.getT());
 
   // return the color
   return color;
@@ -573,6 +593,49 @@ glm::vec3 GLCanvas::GetPos(double i, double j) {
   glm::vec3 poi = camera->point_of_interest;
   float distance = glm::length((cp-poi)/2.0f);
   return r.getOrigin()+distance*r.getDirection();
+}
+
+//Write the image to a file
+void GLCanvas::WriteToFile()
+{
+	//ORIGINAL CODE COMMENT
+	//PLEASE BE UNIQUE
+	std::cout << "Only in new folder!\n";
+	//Open file
+	Image newfile("");
+	newfile.Allocate(args->width, args->height);
+	//Write to file
+	for (int i = 0; i < args->width; i++)
+	{
+		for (int j = 0; j < args->height; j++)
+		{
+			glm::vec3 color = TraceRay((i + 0.5),(j + 0.5));
+			//std::cout << color.r << "\t" << color.g << "\t" << color.b << "\n";
+			double r = linear_to_srgb(color.r);
+			double g = linear_to_srgb(color.g);
+			double b = linear_to_srgb(color.b);
+
+			r *= 255;
+			if (r > 255)
+				r = 255;
+			g *= 255;
+			if (g > 255)
+				g = 255;
+			b *= 255;
+			if (b > 255)
+				b = 255;
+
+
+			int ri, gi, bi;
+			Color pixelcolor(r,g,b);
+			//std::cout << r << "\t" << g << "\t" << b << "\n";
+			newfile.SetPixel(i, j, pixelcolor);
+		}
+	}
+
+	//Save and close file
+	newfile.Save("Rendering.ppm");
+	return;
 }
 
 

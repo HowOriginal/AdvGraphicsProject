@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.8)
-project (hw3)
+project (OriginalProject)
 
 # all the .cpp files that make up this project
 add_executable(render 

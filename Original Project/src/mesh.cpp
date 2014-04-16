@@ -91,7 +91,7 @@ void Mesh::addFace(Vertex *a, Vertex *b, Vertex *c, Vertex *d, Material *materia
   assert (edges.find(std::make_pair(a,b)) == edges.end());
   assert (edges.find(std::make_pair(b,c)) == edges.end());
   assert (edges.find(std::make_pair(c,d)) == edges.end());
-  assert (edges.find(std::make_pair(d,a)) == edges.end());
+  //assert (edges.find(std::make_pair(d,a)) == edges.end());
   // add the edges to the master list
   edges[std::make_pair(a,b)] = ea;
   edges[std::make_pair(b,c)] = eb;
@@ -209,7 +209,74 @@ void Mesh::Load(ArgParser *_args) {
       assert (d >= 0 && d < numVertices());
       assert (active_material != NULL);
       addOriginalQuad(getVertex(a),getVertex(b),getVertex(c),getVertex(d),active_material);
-    } else if (token == "s") {
+    } 
+	/*bunny code*/
+	else if (token == "ft")
+	{
+		int a, b, c, d, ab, bc, ca;
+		objfile >> a >> b >> c;
+		//Add 8 to include vertices for light and plane
+		a += 8;
+		b += 8;
+		c += 8;
+		a--;
+		b--;
+		c--;
+		assert(a >= 0 && a < numVertices());
+		assert(b >= 0 && b < numVertices());
+		assert(c >= 0 && c < numVertices());
+		assert(active_material != NULL);
+
+		//addOriginalQuad(getVertex(a), getVertex(b), getVertex(c), getVertex(a), active_material);
+		
+		int x, y, z;
+		glm::vec3 center;
+
+		//Calculate Center
+		center = getVertex(a)->get() + getVertex(b)->get() + getVertex(c)->get();
+		x = center.x / 3;
+		y = center.y / 3;
+		z = center.z / 3;
+		d = numVertices();
+		center /= 3;
+		addVertex(center);
+		assert(d >= 0 && d < numVertices());
+		addOriginalQuad(getVertex(a), getVertex(b), getVertex(c), getVertex(d), active_material);
+
+		/*
+		//Calculate AB center
+		center = getVertex(a)->get() + getVertex(b)->get();
+		x = center.x / 2;
+		y = center.y / 2;
+		z = center.z / 2;
+		ab = numVertices();
+		addVertex(glm::vec3(x, y, z));
+		assert(ab >= 0 && ab < numVertices());
+
+		//Calculate BC center
+		center = getVertex(b)->get() + getVertex(c)->get();
+		x = center.x / 2;
+		y = center.y / 2;
+		z = center.z / 2;
+		bc = numVertices();
+		addVertex(glm::vec3(x, y, z));
+		assert(bc >= 0 && bc < numVertices());
+
+		//Calculate CA center
+		center = getVertex(c)->get() + getVertex(a)->get();
+		x = center.x / 2;
+		y = center.y / 2;
+		z = center.z / 2;
+		ca = numVertices();
+		addVertex(glm::vec3(x, y, z));
+		assert(ca >= 0 && ca < numVertices());
+
+		addOriginalQuad(getVertex(a), getVertex(ab), getVertex(d), getVertex(ca), active_material);
+		addOriginalQuad(getVertex(b), getVertex(bc), getVertex(d), getVertex(ab), active_material);
+		addOriginalQuad(getVertex(c), getVertex(ca), getVertex(d), getVertex(bc), active_material);
+		*/
+	}
+	else if (token == "s") {
       float x,y,z,r;
       objfile >> x >> y >> z >> r;
       assert (active_material != NULL);
