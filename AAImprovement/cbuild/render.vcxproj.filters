@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\glCanvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\radiosity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\face.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\raytree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\raytracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\cylinder_ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\photon_mapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\kdtree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\boundingbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\MersenneTwister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\argparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\boundingbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\cylinder_ring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\face.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\glCanvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\hit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\kdtree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\photon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\photon_mapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\radiosity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\raytracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\raytree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\AAImprovement\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{BEA37E3D-BB7E-402B-8D6D-55841BAAD6D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D058F224-CDC4-413F-8E43-EF51FA825912}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

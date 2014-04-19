@@ -1,0 +1,3 @@
+C:/Users/Andrew/Documents/GitHub/AdvGraphicsProject/CleanedUp/cbuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/Andrew/Documents/GitHub/AdvGraphicsProject/CleanedUp/cbuild/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Andrew/Documents/GitHub/AdvGraphicsProject/CleanedUp/cbuild/CMakeFiles/render.dir
