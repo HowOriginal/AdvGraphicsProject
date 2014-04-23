@@ -161,7 +161,7 @@ void GLCanvas::animate(){
   }
 
   if (args->raytracing_animation) {
-	  
+	  /*
 	  clock_t t;
 	  int f;
 	  t = clock();
@@ -172,14 +172,14 @@ void GLCanvas::animate(){
 	  t = clock() - t;
 	  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
 	  args->raytracing_animation = false;
-	  /*
+	  */
 	  for (int i = 0; i < 1000; i++) {
 		  
 		  if (!DrawPixel()) {
         args->raytracing_animation = false;
         break;
       }
-    }*/
+    }
 		  
     raytracer->setupVBOs();
   }
@@ -498,7 +498,7 @@ glm::vec3 GLCanvas::TraceRay(double i, double j) {
   // ==================================
   // ASSIGNMENT: IMPLEMENT ANTIALIASING
   // ==================================
-  /*
+  
   if (args->num_antialias_samples > 1)
   {
 	  //Stratified sampling
@@ -563,8 +563,8 @@ glm::vec3 GLCanvas::TraceRay(double i, double j) {
 	  // add that ray for visualization
 	  RayTree::AddMainSegment(r, 0, hit.getT());
   }
-  */
-
+  
+  /*
   // Here's what we do with a single sample per pixel:
   // construct & trace a ray through the center of the pixel
   double x = (i - args->width / 2.0) / double(max_d) + 0.5;
@@ -574,7 +574,7 @@ glm::vec3 GLCanvas::TraceRay(double i, double j) {
   color = raytracer->TraceRay(r, hit, args->num_bounces);
   // add that ray for visualization
   RayTree::AddMainSegment(r, 0, hit.getT());
-
+  */
   // return the color
   return color;
 }

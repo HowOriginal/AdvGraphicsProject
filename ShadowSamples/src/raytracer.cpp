@@ -92,7 +92,7 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 
 		float distToLightCentroid = glm::length(lightCentroid - point);
 		myLightColor = lightColor / float(M_PI*distToLightCentroid*distToLightCentroid);
-
+		
 		//For each shadow sample, cast a light ray
 		if (args->num_shadow_samples <= 1)
 		{
@@ -110,6 +110,86 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 		}
 		else
 		{
+			
+			//Adaptive samples
+			//std::vector<glm::vec3> shading;
+			glm::vec3 shadeanswer(0, 0, 0);
+			int shadecounter = 0;
+			for (int i = 0; i < 4; i++)
+			{
+				glm::vec3 lightCorner;
+				lightCorner = (*f)[i]->get();
+				dirToLightCentroid = glm::normalize(lightCorner - point);
+
+				//Cast a ray towards the light source
+				Ray r(point, dirToLightCentroid);
+				Hit Lhit = Hit();
+				bool Lintersect = CastRay(r, Lhit, false);
+				// If there is no intersection, cast a ray to the light source
+				// The ray will hit an object or the light source, if it is the light the distance of the ray Hit will be ~distToLightCentroid
+				distToLightCentroid = glm::length(lightCorner - point);
+				if (Lhit.getT() > distToLightCentroid - (float)EPSILON)
+				{
+					RayTree::AddShadowSegment(r, 0, distToLightCentroid);
+					glm::vec3 part = m->Shade(ray, hit, dirToLightCentroid, myLightColor, args);
+					part /= 4;
+					//shading.push_back(part);
+					shadeanswer += part;
+				}
+				else
+				{
+					shadecounter++;
+					//answer += glm::vec3(.5,0,0);
+					//return glm::vec3(1,0,0);
+				}
+			}
+			/*
+			if (shadecounter == 4)
+				shadeanswer /= 4;
+			else
+				shadeanswer /= 4 - shadecounter;
+			answer += shadeanswer;
+			shadeanswer = glm::vec3(0, 0, 0);
+			*/
+			//No obstructions
+			if (shadecounter == 0)
+			{
+				answer += shadeanswer;
+			}
+			//Some obstructions
+			else if (shadecounter != 4)
+			{
+				//shadecounter = 0;
+				for (int i = 0; i < args->num_shadow_samples; i++)
+				{
+					//Random sampling
+					lightCentroid = f->RandomPoint();
+
+					dirToLightCentroid = glm::normalize(lightCentroid - point);
+
+					//Cast a ray towards the light source
+					Ray r(point, dirToLightCentroid);
+					Hit Lhit = Hit();
+					bool Lintersect = CastRay(r, Lhit, false);
+					// If there is no intersection, cast a ray to the light source
+					// The ray will hit an object or the light source, if it is the light the distance of the ray Hit will be ~distToLightCentroid
+					distToLightCentroid = glm::length(lightCentroid - point);
+					if (Lhit.getT() > distToLightCentroid - (float)EPSILON)
+					{
+						RayTree::AddShadowSegment(r, 0, distToLightCentroid);
+						glm::vec3 part = m->Shade(ray, hit, dirToLightCentroid, myLightColor, args);
+						part /= args->num_shadow_samples;
+						//part /= 4;
+						answer += part;
+						//shadecounter++;
+					}
+				}
+				//shadeanswer /= shadecounter;
+				//answer /= 3;
+			}
+			
+			//Old code
+			/*
 			for (int i = 0; i < args->num_shadow_samples; i++)
 			{
 				//Random sampling
@@ -133,6 +213,7 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 					answer += part;
 				}
 			}
+			*/
 		}
 	}
 

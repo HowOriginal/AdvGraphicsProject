@@ -168,19 +168,19 @@ void GLCanvas::animate(){
 	  printf("Rendering...\n");
 
     // draw 100 pixels and then refresh the screen and handle any user input
-	  WriteToFile();
-	  t = clock() - t;
-	  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
-	  args->raytracing_animation = false;
-	  /*
+	 // WriteToFile();
+	  
 	  for (int i = 0; i < 1000; i++) {
 		  
-		  if (!DrawPixel()) {
-        args->raytracing_animation = false;
-        break;
-      }
-    }*/
-		  
+		  if (!DrawPixel()) 
+		  {
+			 args->raytracing_animation = false;
+			 break;
+			}
+    }
+	  t = clock() - t;
+	  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
+	  //args->raytracing_animation = false;
     raytracer->setupVBOs();
   }
 }

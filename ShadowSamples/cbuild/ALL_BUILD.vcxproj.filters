@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowSamples\src\CMakeLists.txt" />
+    <CustomBuild Include="CMakeFiles\9cec98641f0e930e03765d5b89f0e23f\ALL_BUILD.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CMakeFiles\ALL_BUILD" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{9116ED26-B32B-4268-A373-9BA3BBC99483}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
