@@ -1,6 +1,6 @@
 #include "face.h"
 #include "utils.h"
-
+#include <windows.h>
 // =========================================================================
 // =========================================================================
 
@@ -20,16 +20,16 @@ float Face::getArea() const {
 
 // =========================================================================
 
-glm::vec3 Face::RandomPoint() const {
+glm::vec3 Face::RandomPoint() {
   glm::vec3 a = (*this)[0]->get();
   glm::vec3 b = (*this)[1]->get();
   glm::vec3 c = (*this)[2]->get();
   glm::vec3 d = (*this)[3]->get();
 
-  MTRand mtrand;
-  float s = mtrand.rand(); // random real in [0,1]
-  float t = mtrand.rand(); // random real in [0,1]
-
+  WaitForSingleObject(this->ranLock,INFINITE);
+  float s = this->mtrand.rand(); // random real in [0,1]
+  float t = this->mtrand.rand(); // random real in [0,1]
+  ReleaseMutex(this->ranLock);
   glm::vec3 answer = s*t*a + s*(1-t)*b + (1-s)*t*d + (1-s)*(1-t)*c;
   return answer;
 }

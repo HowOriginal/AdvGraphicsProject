@@ -5,7 +5,8 @@
 #include "ray.h"
 #include "vertex.h"
 #include "hit.h"
-
+#include <windows.h>
+#include "MersenneTwister.h"
 class Material;
 
 // ==============================================================
@@ -19,7 +20,8 @@ public:
   // CONSTRUCTOR & DESTRUCTOR
   Face(Material *m) {
     edge = NULL;
-    material = m; }
+    material = m;
+    ranLock=CreateMutex(NULL,FALSE,NULL);}
 
   // =========
   // ACCESSORS
@@ -44,7 +46,7 @@ public:
   }
   Material* getMaterial() const { return material; }
   float getArea() const;
-  glm::vec3 RandomPoint() const;
+  glm::vec3 RandomPoint();
   glm::vec3 computeNormal() const;
 
   // =========
@@ -62,7 +64,7 @@ public:
   // =========
   // RADIOSITY
   int getRadiosityPatchIndex() const { return radiosity_patch_index; }
-  void setRadiosityPatchIndex(int i) { radiosity_patch_index = i; }
+  void setRadiosityPatchIndex(int i) { radiosity_patch_index = i; mtrand.seed(i); }
 
 protected:
 
@@ -82,6 +84,8 @@ protected:
   
   int radiosity_patch_index;  // an awkward pointer to this patch in the Radiosity patch array
   Material *material;
+  MTRand mtrand;
+  HANDLE ranLock;
 };
 
 // ===========================================================

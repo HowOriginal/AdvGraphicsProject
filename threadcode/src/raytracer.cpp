@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "glCanvas.h"
-
+#include <windows.h>
 #include "raytracer.h"
 #include "material.h"
 #include "argparser.h"
@@ -60,7 +60,7 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 	assert(m != NULL);
 	// rays coming from the light source are set to white, don't bother to ray trace further.
 	if (glm::length(m->getEmittedColor()) > 0.001) {
-		return glm::vec3(1, 1, 1);
+		return m->getEmittedColor();
 	}
 
 
@@ -102,7 +102,7 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 			bool Lintersect = CastRay(r, Lhit, false);
 			// If there is no intersection, cast a ray to the light source
 			// The ray will hit an object or the light source, if it is the light the distance of the ray Hit will be ~distToLightCentroid
-			if (Lhit.getT() > distToLightCentroid - 1)
+			if (Lhit.getT() > distToLightCentroid - EPSILON)
 			{
 				RayTree::AddShadowSegment(r, 0, distToLightCentroid);
 				answer += m->Shade(ray, hit, dirToLightCentroid, myLightColor, args);
@@ -116,7 +116,7 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 				lightCentroid = f->RandomPoint();
 
 				dirToLightCentroid = glm::normalize(lightCentroid - point);
-				point += dirToLightCentroid * (float)EPSILON;
+				//point += dirToLightCentroid * (float)EPSILON;
 				//Cast a ray towards the light source
 				Ray r(point, dirToLightCentroid);
 				Hit Lhit = Hit();
@@ -128,11 +128,12 @@ glm::vec3 RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
 				{
 					RayTree::AddShadowSegment(r, 0, distToLightCentroid);
 					glm::vec3 part = m->Shade(ray, hit, dirToLightCentroid, myLightColor, args);
-					part /= args->num_shadow_samples;
 					answer += part;
 				}
 			}
+			answer/=args->num_shadow_samples;
 		}
+
 	}
 
 	// ----------------------------------------------

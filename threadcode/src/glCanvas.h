@@ -83,6 +83,7 @@ static PhotonMapping *photon_mapping;
   static int pixels;
   static HANDLE* rayLock;
   static HANDLE* glLock;
+  static HANDLE* ranLock;
 
   static GLuint render_VAO;
 
