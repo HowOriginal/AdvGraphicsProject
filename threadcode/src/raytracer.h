@@ -6,7 +6,7 @@
 #include "ray.h"
 #include "hit.h"
 #include "vbo_structs.h"
-
+#include <windows.h>
 class Mesh;
 class ArgParser;
 class Radiosity;
@@ -39,7 +39,7 @@ public:
   bool CastRay(const Ray &ray, Hit &h, bool use_sphere_patches) const;
 
   // does the recursive work
-  glm::vec3 TraceRay(Ray &ray, Hit &hit, int bounce_count = 0) const;
+  glm::vec3 TraceRay(Ray &ray, Hit &hit, int bounce_count) const;
 
 private:
 

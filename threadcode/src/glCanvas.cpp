@@ -62,6 +62,7 @@ GLint GLCanvas::mytexture;
 HANDLE* GLCanvas::threads;
 HANDLE* GLCanvas::rayLock=new HANDLE[1];
 HANDLE* GLCanvas::glLock=new HANDLE[1];
+HANDLE* GLCanvas::ranLock=new HANDLE[1];
 int GLCanvas::pixels=0;
 
 //Thread Variable Struct
@@ -73,6 +74,7 @@ typedef struct ThreadValues
 	int* pixels;
 	HANDLE* rayLock;
 	HANDLE* glLock;
+	HANDLE* ranLock;
 	ArgParser* args;
 	Camera* camera;
 	RayTracer *raytracer;
@@ -97,6 +99,7 @@ void GLCanvas::initialize(ArgParser *_args) {
   //Threads
   *rayLock=CreateMutex(NULL,FALSE,NULL);
   *glLock=CreateMutex(NULL,FALSE,NULL);
+  *ranLock=CreateMutex(NULL,FALSE,NULL);
   threads = new HANDLE[args->num_threads];
 
   Load();
@@ -527,9 +530,10 @@ glm::vec3 TraceRay(double i, double j,tVals* arg) {
 	  for (int n = 0; n < arg->args->num_antialias_samples; n++)
 	  {
 		  //Random sampling
-		  MTRand mtrand;
-		  double x = (mtrand.rand()*2 + i - arg->args->width / 2.0) / double(max_d) + 0.5;
-		  double y = (mtrand.rand()*2 + j - arg->args->height / 2.0) / double(max_d) + 0.5;
+		  WaitForSingleObject(*arg->ranLock,INFINITE);
+		  double x = (GLOBAL_MTRAND.rand()*2 + i - arg->args->width / 2.0) / double(max_d) + 0.5;
+		  double y = (GLOBAL_MTRAND.rand()*2 + j - arg->args->height / 2.0) / double(max_d) + 0.5;
+		  ReleaseMutex(*arg->ranLock);
 		  Ray r = arg->camera->generateRay(x, y);
 		  Hit hit;
 		  glm::vec3 part = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
@@ -626,7 +630,7 @@ void GLCanvas::WriteToFile()
 {
 	//ORIGINAL CODE COMMENT
 	//PLEASE BE UNIQUE
-	std::cout << "Only in new folder!\n";
+	std::cout << "Picture appears within current directory\n";
 	//Open file
 	Image newfile("");
 	newfile.Allocate(args->width, args->height);
@@ -645,6 +649,7 @@ void GLCanvas::WriteToFile()
 	vars.pixels=&pixels;
 	vars.rayLock=rayLock;
 	vars.glLock=glLock;
+	vars.ranLock=ranLock;
 	vars.args=args;
 	vars.camera=camera;
 	vars.raytracer=raytracer;
@@ -699,35 +704,7 @@ void GLCanvas::WriteToFile()
 			}
 		}
 	}
-/*
-	for (int i = 0; i < args->width; i++)
-	{
-		for (int j = 0; j < args->height; j++)
-		{
-			glm::vec3 color = TraceRay((i + 0.5),(j + 0.5));
-			//std::cout << color.r << "\t" << color.g << "\t" << color.b << "\n";
-			double r = linear_to_srgb(color.r);
-			double g = linear_to_srgb(color.g);
-			double b = linear_to_srgb(color.b);
 
-			r *= 255;
-			if (r > 255)
-				r = 255;
-			g *= 255;
-			if (g > 255)
-				g = 255;
-			b *= 255;
-			if (b > 255)
-				b = 255;
-
-
-			int ri, gi, bi;
-			Color pixelcolor(r,g,b);
-			//std::cout << r << "\t" << g << "\t" << b << "\n";
-			newfile.SetPixel(i, j, pixelcolor);
-		}
-	}
-*/
 	//Save and close file
 	newfile.Save("Rendering.ppm");
 	return;

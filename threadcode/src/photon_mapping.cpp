@@ -83,7 +83,7 @@ void PhotonMapping::TracePhotons() {
     glm::vec3 energy = my_area/float(num) * lights[i]->getMaterial()->getEmittedColor();
     glm::vec3 normal = lights[i]->computeNormal();
     for (int j = 0; j < num; j++) {
-      glm::vec3 start = lights[i]->RandomPoint();
+      glm::vec3 start;// = lights[i]->RandomPoint();
       // the initial direction for this photon (for diffuse light sources)
       glm::vec3 direction = RandomDiffuseDirection(normal);
       TracePhoton(start,direction,energy,0);
