@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\glCanvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\radiosity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\face.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\raytree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\raytracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\cylinder_ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\photon_mapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\kdtree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\boundingbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\MersenneTwister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\argparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\boundingbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\cylinder_ring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\face.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\glCanvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\hit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\kdtree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\photon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\photon_mapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\radiosity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\raytracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\raytree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\FinishedSampling\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{859C92DF-CFD1-4ECF-9136-046FD7779086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{43D85B43-4EA3-40CC-AB3D-A9CDB61431C6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
