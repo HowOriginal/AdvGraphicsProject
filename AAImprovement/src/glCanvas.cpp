@@ -161,7 +161,7 @@ void GLCanvas::animate(){
   }
 
   if (args->raytracing_animation) {
-	  /*
+	  
 	  clock_t t;
 	  int f;
 	  t = clock();
@@ -172,9 +172,9 @@ void GLCanvas::animate(){
 	  t = clock() - t;
 	  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
 	  args->raytracing_animation = false;
-	  */
 	  
 	  
+	  /*
 	  for (int i = 0; i < 1000; i++) {
 		  
 		  if (!DrawPixel()) {
@@ -182,7 +182,7 @@ void GLCanvas::animate(){
         break;
       }
     }
-		  
+		*/  
     raytracer->setupVBOs();
   }
 }

@@ -166,7 +166,12 @@ void GLCanvas::animate(){
   }
 
   if (args->raytracing_animation) {
-	  /*
+	  //Set up view constants
+	  int max_d = std::max(args->width, args->height);
+	  pixelSize = 1 / double(max_d);
+	  widthConst = 0.5 - (args->width / 2.0) * pixelSize;
+	  heightConst = 0.5 - (args->height / 2.0) * pixelSize;
+
 	  clock_t t;
 	  int f;
 	  t = clock();
@@ -177,14 +182,10 @@ void GLCanvas::animate(){
 	  t = clock() - t;
 	  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
 	  args->raytracing_animation = false;
-	  */
+	  
 	  
 	
-	//Set up view constants
-	int max_d = std::max(args->width, args->height);
-	pixelSize = 1 / double(max_d);
-	widthConst = 0.5 - (args->width / 2.0) * pixelSize;
-	heightConst = 0.5 - (args->height / 2.0) * pixelSize;
+	  /*
 	for (int i = 0; i < 1000; i++)
 	{
 		if (!DrawPixel()) 
@@ -193,7 +194,7 @@ void GLCanvas::animate(){
 			break;
 		}
 	}
-	
+	*/
     raytracer->setupVBOs();
   }
 }

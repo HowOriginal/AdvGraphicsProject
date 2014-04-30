@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\glCanvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\radiosity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\face.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\raytree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\raytracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\cylinder_ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\photon_mapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\kdtree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\boundingbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\MersenneTwister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\argparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\boundingbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\cylinder_ring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\face.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\glCanvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\hit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\kdtree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\photon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\photon_mapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\radiosity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\raytracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\raytree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\threadcode\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5A7B4243-72B8-4403-B13B-C3A33BC68597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{1C40882A-2026-4EF2-8CD0-AE1ADFBE021A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
