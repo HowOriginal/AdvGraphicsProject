@@ -25,6 +25,10 @@ PhotonMapping* GLCanvas::photon_mapping = NULL;
 
 BoundingBox GLCanvas::bbox;
 GLFWwindow* GLCanvas::window = NULL;
+//pixel location constants
+double pixelSize = 0;
+double widthConst = 0;
+double heightConst = 0;
 
 // mouse position
 int GLCanvas::mouseX = 0;
@@ -41,6 +45,7 @@ bool GLCanvas::superKeyPressed = false;
 
 int GLCanvas::raytracing_x;
 int GLCanvas::raytracing_y;
+int GLCanvas::raytracing_skip;
 int GLCanvas::raytracing_divs_x;
 int GLCanvas::raytracing_divs_y;
 
@@ -57,6 +62,33 @@ GLuint GLCanvas::colormodeID;
 GLuint GLCanvas::textureID;
 GLint GLCanvas::mytexture;
 
+//params for threads
+HANDLE* GLCanvas::threads;
+HANDLE* GLCanvas::rayLock=new HANDLE[1];
+HANDLE* GLCanvas::glLock=new HANDLE[1];
+HANDLE* GLCanvas::ranLock=new HANDLE[1];
+int GLCanvas::pixels=0;
+
+//Thread Variable Struct
+typedef struct ThreadValues
+{
+	int* raytracing_x;
+	int* raytracing_y;
+	int* raytracing_skip;
+	int* pixels;
+	HANDLE* rayLock;
+	HANDLE* glLock;
+	HANDLE* ranLock;
+	ArgParser* args;
+	Camera* camera;
+	RayTracer *raytracer;
+} tVals;
+glm::vec3 TraceRay(double i, double j,tVals* vars);
+//Global Variables for updates
+bool globalIsPoint;
+double globalR,globalG,globalB;
+double globalX,globalY;
+int globalSkip;
 // ========================================================
 // Initialize all appropriate OpenGL variables, set
 // callback functions, and start the main event loop.
@@ -67,6 +99,12 @@ GLint GLCanvas::mytexture;
 void GLCanvas::initialize(ArgParser *_args) {
 
   args = _args;
+
+  //Threads
+  *rayLock=CreateMutex(NULL,FALSE,NULL);
+  *glLock=CreateMutex(NULL,FALSE,NULL);
+  *ranLock=CreateMutex(NULL,FALSE,NULL);
+  threads = new HANDLE[args->num_threads];
 
   Load();
 
@@ -159,29 +197,30 @@ void GLCanvas::animate(){
     }
     radiosity->setupVBOs();
   }
-  clock_t t;
-  int f;
-  t = clock();
-  printf("Rendering...\n");
-  while (args->raytracing_animation) {
 
+  if (args->raytracing_animation) {
+	  
+	  clock_t t;
+	  int f;
+	  t = clock();
+	  printf("Rendering...\n");
 
     // draw 100 pixels and then refresh the screen and handle any user input
-	 // WriteToFile();
+	  WriteToFile();
 	  
-	for (int i = 0; i < 1000; i++) {
-		if (!DrawPixel()) 
-		{
-			 args->raytracing_animation = false;
-			 break;
-		}
-    }
-	  
-	  //args->raytracing_animation = false;
+	  /*
+	  for (int i = 0; i < 100; i++) {
+		  
+		  if (!DrawPixel()) {
+        args->raytracing_animation = false;
+        break;
+      }
+    }*/
+	  t = clock() - t;
+	  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
+	  args->raytracing_animation = false;
     raytracer->setupVBOs();
   }
-  t = clock() - t;
-  printf("Rendering time: (%f seconds).\n", ((float)t) / CLOCKS_PER_SEC);
 }
 
 
@@ -382,7 +421,7 @@ void GLCanvas::keyboardCB(GLFWwindow* window, int key, int scancode, int action,
       RayTree::Activate();
       raytracing_divs_x = -1;
       raytracing_divs_y = -1;
-      TraceRay(mouseX,args->height-mouseY);
+      //TraceRay(mouseX,args->height-mouseY);
       RayTree::Deactivate();
       glm::vec3 cp = camera->camera_position;
       glm::vec3 poi = camera->point_of_interest;
@@ -485,42 +524,195 @@ void GLCanvas::keyboardCB(GLFWwindow* window, int key, int scancode, int action,
 
 
 // trace a ray through pixel (i,j) of the image an return the color
-glm::vec3 GLCanvas::TraceRay(double i, double j) {
-  // compute and set the pixel color
-  int max_d = std::max(args->width,args->height);
-  glm::vec3 color;
+glm::vec3 TraceRay(double i, double j,tVals* arg) {
+	// compute and set the pixel color
+	glm::vec3 color;
+	double x0 = i * pixelSize + widthConst;
+	double y0 = j * pixelSize + heightConst;
+	x0 -= pixelSize / 2;
+	y0 -= pixelSize / 2;
+	glm::vec3 part;
+	
+	std::vector< std::vector< std::vector<glm::vec3> > > depthTree;
+	glm::vec3 colors[5][5][4] = { glm::vec3(0,0,0) };
+	glm::vec2 positions[5][5][4] = { glm::vec2(0, 0) };
+	Hit hit;
+	//Initialize depth array
+	int counter = 0;
+	for (int m = 0; m < 2; m++)
+	{
+		for (int n = 0; n < 2; n++)
+		{
+			double x = x0 + m * pixelSize;
+			double y = y0 + n * pixelSize;
+			Ray r = arg->camera->generateRay(x, y);
+			part = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+			colors[counter][0][0] = part;
+			positions[counter][0][0] = glm::vec2(x, y);
+			counter++;
+			//part /= 4;
+			//color += part;
+		}
+	}
+	/*
+	//Perform variance check on the first level
+	float VarianceLimit = .01;
+	bool withinBounds = true;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = i + 1; j < 4; j++)
+		{
+			if (withinBounds && abs(colors[i][0][0].r - colors[j][0][0].r) > VarianceLimit ||
+				abs(colors[i][0][0].g - colors[j][0][0].g) > VarianceLimit ||
+				abs(colors[i][0][0].b - colors[j][0][0].b) > VarianceLimit)
+			{
+				withinBounds = false;
+			}
+		}
+	}
+	//If a problem is found, subdivide
+	if (!withinBounds)
+	{
+		positions[4][0][0] = (positions[0][0][0] + positions[1][0][0] + positions[2][0][0] + positions[3][0][0]) / (float)4;
+		Ray r = arg->camera->generateRay(positions[4][0][0].x, positions[4][0][0].y);
+		colors[4][0][0] = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+		//Set up points for each subdivision in the next depth
+		for (int n = 0; n < 4; n++)
+		{
+			positions[n][1][0] = (positions[n][0][0] + positions[(n+1)%4][0][0]) / (float)2;
+			r = arg->camera->generateRay(positions[n][1][0].x, positions[n][1][0].y);
+			colors[n][1][0] = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
 
-  if (args->num_antialias_samples > 1)
-  {
-	  for (int n = 0; n < args->num_antialias_samples; n++)
-	  {
-		  //Random sampling
-		  double x = (GLOBAL_MTRAND.rand()*2 + i - args->width / 2.0) / double(max_d) + 0.5;
-		  double y = (GLOBAL_MTRAND.rand()*2 + j - args->height / 2.0) / double(max_d) + 0.5;
-		  Ray r = camera->generateRay(x, y);
-		  Hit hit;
-		  glm::vec3 part = raytracer->TraceRay(r, hit, args->num_bounces);
-		  part /= args->num_antialias_samples;
-		  color += part;
-		  // add that ray for visualization
-		  RayTree::AddMainSegment(r, 0, hit.getT());
-	  }
-  }
-  else
-  {
-	  // Here's what we do with a single sample per pixel:
-	  // construct & trace a ray through the center of the pixel
-	  double x = (i - args->width / 2.0) / double(max_d) + 0.5;
-	  double y = (j - args->height / 2.0) / double(max_d) + 0.5;
-	  Ray r = camera->generateRay(x, y);
-	  Hit hit;
-	  color = raytracer->TraceRay(r, hit, args->num_bounces);
-	  // add that ray for visualization
-	  RayTree::AddMainSegment(r, 0, hit.getT());
-  }
-  // return the color
-  return color;
+			positions[n][2][0] = positions[4][0][0];
+			colors[n][2][0] = colors[4][0][0];
+
+			positions[n][3][0] = (positions[n][0][0] + positions[(n + 3) % 4][0][0]) / (float)2;
+			r = arg->camera->generateRay(positions[n][3][0].x, positions[n][3][0].y);
+			colors[n][3][0] = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+			//Check variance for subdivision n
+			withinBounds = true;
+			for (int ni = 0; ni < 4; ni++)
+			{
+				for (int nj = ni + 1; nj < 4; j++)
+				{
+					if (withinBounds && abs(colors[n][ni][0].r - colors[n][nj][0].r) > VarianceLimit ||
+						abs(colors[n][ni][0].g - colors[n][nj][0].g) > VarianceLimit ||
+						abs(colors[n][ni][0].b - colors[n][nj][0].b) > VarianceLimit)
+					{
+						//withinBounds = false;
+					}
+				}
+			}
+			//If a problem is found, subdivide
+			if (!withinBounds)
+			{
+				positions[n][4][0] = (positions[n][0][0] + positions[n][1][0] + positions[n][2][0] + positions[n][3][0]) / (float)4;
+				Ray r = arg->camera->generateRay(positions[n][4][0].x, positions[n][4][0].y);
+				colors[n][4][0] = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+				//Set up points for each subdivision in the next depth
+				for (int m = 0; m < 4; m++)
+				{
+					positions[n][m][1] = (positions[n][m][0] + positions[n][(m + 1) % 4][0]) / (float)2;
+					r = arg->camera->generateRay(positions[n][m][1].x, positions[n][m][1].y);
+					colors[n][m][1] = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+
+					positions[n][m][2] = positions[n][4][0];
+					colors[n][m][2] = colors[n][4][0];
+
+					positions[n][m][3] = (positions[n][m][0] + positions[n][(m + 3) % 4][0]) / (float)2;
+					r = arg->camera->generateRay(positions[n][m][3].x, positions[n][m][3].y);
+					colors[n][m][3] = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+					//Don't need to check variance for subdivision m
+				}
+			}
+		}
+	}
+	*/
+	counter = 0;
+	for (int a = 0; a < 4; a++)
+	{
+		for (int b = 0; b < 4; b++)
+		{
+			for (int c = 0; c < 4; c++)
+			{
+				if (colors[a][b][c] != glm::vec3(0,0,0))
+				{
+					color += colors[a][b][c];
+					counter++;
+				}
+			}
+		}
+	}
+	color /= counter;
+  
+/*
+  std::vector<glm::vec3> colors;
+
+  for (int m = 0; m < 2; m++)
+  	{
+  		for (int n = 0; n < 2; n++)
+  		{
+  			double x = x0 + m * pixelSize;
+  			double y = y0 + n * pixelSize;
+
+  			Ray r = arg->camera->generateRay(x, y);
+  			Hit hit;
+  			part = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+  			colors.push_back(part);
+  			part /= 4;
+  			color += part;
+
+  			// add that ray for visualization
+  			RayTree::AddMainSegment(r, 0, hit.getT());
+  		}
+  	}
+  	float VarianceLimit = .01;
+  	bool withinBounds = true;
+  	for (int m = 0; m < 4; m++)
+  	{
+  		for (int n = m + 1; n < 4; n++)
+  		{
+  			if (withinBounds && abs(colors[m].r - colors[n].r) > VarianceLimit ||
+  								abs(colors[m].g - colors[n].g) > VarianceLimit ||
+  								abs(colors[m].b - colors[n].b) > VarianceLimit)
+  			{
+  				withinBounds = false;
+				//return glm::vec3(1, 0, 0);
+  				//Return red for debugging
+  				//return glm::vec3(1, 0, 0);
+  			}
+  		}
+  	}
+  	if (!withinBounds)
+  	{
+  		for (int i = 0; i < 3; i++)
+  		{
+  			for (int j = 0; j < 3; j++)
+  			{
+  				int check = i * 2 + j * 6;
+  				if (check != 0 && check != 2 && check != 6 && check != 8)
+  				{
+  					double x = x0 + i * pixelSize / 2;
+  					double y = y0 + j * pixelSize / 2;
+  					Ray r = arg->camera->generateRay(x, y);
+  					Hit hit;
+  					part = arg->raytracer->TraceRay(r, hit, arg->args->num_bounces);
+  					part /= 5;
+  					color += part;
+  					// add that ray for visualization
+  					RayTree::AddMainSegment(r, 0, hit.getT());
+  				}
+
+  			}
+  		}
+  		//The average of the four corners and average of the adaptivly sampled area is weighted equally
+  		color /= 2;
+  	}
+	*/
+  	// return the color
+  	return color;
 }
+
 
 
 
@@ -537,26 +729,109 @@ glm::vec3 GLCanvas::GetPos(double i, double j) {
   float distance = glm::length((cp-poi)/2.0f);
   return r.getOrigin()+distance*r.getDirection();
 }
+DWORD WINAPI ThreadFunc(void * arg)
+{
+	tVals* vars = (tVals*)arg;
+	int i=0;
+	while(true)
+	{
+		i++;
+		double rayx,rayy;
+ 	    int tempSkip;
+	    WaitForSingleObject(*(vars->rayLock),INFINITE);
 
+	    if ((*vars->raytracing_x) >= vars->args->width) {
+		    (*vars->raytracing_x) = (*vars->raytracing_skip)/2;
+		    (*vars->raytracing_y) += (*vars->raytracing_skip);
+	    }
+	    if ((*vars->raytracing_y) >= vars->args->height) {
+		  if ((*vars->raytracing_skip) == 1) break;
+		  (*vars->raytracing_skip) = *(vars->raytracing_skip) / 2;
+		  if (*(vars->raytracing_skip) % 2 == 0) (*vars->raytracing_skip)++;
+			assert (*(vars->raytracing_skip) >= 1);
+			(*vars->raytracing_x) = (*vars->raytracing_skip)/2;
+			(*vars->raytracing_y) = (*vars->raytracing_skip)/2;
+
+	    }
+	    rayx=*(vars->raytracing_x);
+	    rayy=*(vars->raytracing_y);
+		tempSkip=(*vars->raytracing_skip);
+		(*vars->raytracing_x) += *(vars->raytracing_skip);
+		(*vars->pixels)+=1;
+
+
+		ReleaseMutex(*(vars->rayLock));
+
+		// compute the color and position of intersection
+		glm::vec3 color= TraceRay(rayx, rayy,vars);
+		double r = linear_to_srgb(color.r);
+		double g = linear_to_srgb(color.g);
+		double b = linear_to_srgb(color.b);
+
+		WaitForSingleObject(*(vars->glLock),INFINITE);
+		globalR=r;globalG=g;globalB=b;
+		globalX=rayx;globalY=rayy;
+		globalSkip=tempSkip;
+		//if ((*vars->pixels)<10000)
+		globalIsPoint=true;
+		while (globalIsPoint);
+		ReleaseMutex(*(vars->glLock));
+	}
+	std::cout<<"Thread terminated"<<std::endl;
+	return 0;
+}
 //Write the image to a file
 void GLCanvas::WriteToFile()
 {
 	//ORIGINAL CODE COMMENT
 	//PLEASE BE UNIQUE
-	std::cout << "Only in new folder!\n";
+	int max_d = std::max(args->width, args->height);
+	pixelSize = 1.0 / max_d;
+	widthConst = 0.5 - (args->width / 2.0) * pixelSize;
+	heightConst = 0.5 - (args->height / 2.0) * pixelSize;
+	std::cout<<pixelSize<<widthConst<<" "<<heightConst<<std::endl;
 	//Open file
 	Image newfile("");
 	newfile.Allocate(args->width, args->height);
 	//Write to file
-	for (int i = 0; i < args->width; i++)
+	pixels=0;
+	globalIsPoint=false;
+	globalX=0;globalY=0;
+	globalR=0;globalG=0;globalB=0;
+	raytracing_x = 0;
+	raytracing_y = 0;
+	raytracing_skip=1;
+	tVals vars ={};
+	vars.raytracing_x=&raytracing_x;
+	vars.raytracing_y=&raytracing_y;
+	vars.raytracing_skip=&raytracing_skip;
+	vars.pixels=&pixels;
+	vars.rayLock=rayLock;
+	vars.glLock=glLock;
+	vars.ranLock=ranLock;
+	vars.args=args;
+	vars.camera=camera;
+	vars.raytracer=raytracer;
+	for (int i=0;i<args->num_threads;i++)
 	{
-		for (int j = 0; j < args->height; j++)
+		TerminateThread(threads[i],0);
+	}
+	for (int i=0;i<args->num_threads;i++)
+	{
+		threads[i]= CreateThread(NULL, 0, ThreadFunc, &vars, 0, NULL);
+	}
+
+	int numFinished=0;
+	int i=0;
+	while (numFinished<args->num_threads)
+	{
+		i++;
+		if (globalIsPoint)
 		{
-			glm::vec3 color = TraceRay((i + 0.5),(j + 0.5));
-			//std::cout << color.r << "\t" << color.g << "\t" << color.b << "\n";
-			double r = linear_to_srgb(color.r);
-			double g = linear_to_srgb(color.g);
-			double b = linear_to_srgb(color.b);
+
+			double r = globalR;
+			double g=globalG;
+			double b = globalB;
 
 			r *= 255;
 			if (r > 255)
@@ -571,8 +846,21 @@ void GLCanvas::WriteToFile()
 
 			int ri, gi, bi;
 			Color pixelcolor(r,g,b);
-			//std::cout << r << "\t" << g << "\t" << b << "\n";
-			newfile.SetPixel(i, j, pixelcolor);
+			//std::cout << globalX << "\t" << globalY << "\t" << std::endl;
+			newfile.SetPixel(globalX, globalY, pixelcolor);
+			globalIsPoint=false;
+
+		}
+		if (i>10000)
+		{
+			i=0;
+			numFinished=0;
+			for (int i=0;i<args->num_threads;i++)
+			{
+				DWORD WINAPI isFinished=WaitForSingleObject(threads[i],0);
+				if (isFinished==WAIT_OBJECT_0)
+					numFinished++;
+			}
 		}
 	}
 
@@ -629,8 +917,8 @@ int GLCanvas::DrawPixel() {
   glm::vec3 pos3 =  GetPos((raytracing_x+1)*x_spacing, (raytracing_y+1)*y_spacing);
   glm::vec3 pos4 =  GetPos((raytracing_x  )*x_spacing, (raytracing_y+1)*y_spacing);
   
-  glm::vec3 color = TraceRay((raytracing_x+0.5)*x_spacing, (raytracing_y+0.5)*y_spacing);
-
+  //glm::vec3 color = TraceRay((raytracing_x+0.5)*x_spacing, (raytracing_y+0.5)*y_spacing);
+  glm::vec3 color;
   double r = linear_to_srgb(color.r);
   double g = linear_to_srgb(color.g);
   double b = linear_to_srgb(color.b);

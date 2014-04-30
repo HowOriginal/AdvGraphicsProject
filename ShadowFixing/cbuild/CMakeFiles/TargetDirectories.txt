@@ -1,0 +1,3 @@
+C:/Users/Andrew/Documents/GitHub/AdvGraphicsProject/ShadowFixing/cbuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/Andrew/Documents/GitHub/AdvGraphicsProject/ShadowFixing/cbuild/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Andrew/Documents/GitHub/AdvGraphicsProject/ShadowFixing/cbuild/CMakeFiles/render.dir

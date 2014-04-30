@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\glCanvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\radiosity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\face.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\raytree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\raytracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\cylinder_ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\photon_mapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\kdtree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\boundingbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\MersenneTwister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\argparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\boundingbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\cylinder_ring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\face.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\glCanvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\hit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\kdtree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\photon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\photon_mapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\primitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\radiosity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\raytracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\raytree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Andrew\Documents\GitHub\AdvGraphicsProject\ShadowFixing\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1102819E-2F33-4D5C-BB92-6F1D873DEDDD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{F27C845E-8D98-4E91-BA5C-48A320D5ED50}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
