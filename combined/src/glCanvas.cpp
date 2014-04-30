@@ -674,7 +674,6 @@ void GLCanvas::WriteToFile()
 	pixelSize = 1.0 / max_d;
 	widthConst = 0.5 - (args->width / 2.0) * pixelSize;
 	heightConst = 0.5 - (args->height / 2.0) * pixelSize;
-	std::cout<<pixelSize<<widthConst<<" "<<heightConst<<std::endl;
 	//Open file
 	Image newfile("");
 	newfile.Allocate(args->width, args->height);
